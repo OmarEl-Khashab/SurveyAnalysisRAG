@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Analysis Tool</title>
+    <!-- Link to Google Font and custom CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <div class="header">
+                <img src="{{ url_for('static', path='images/final logo.png') }}" alt="Logo" class="logo">
+                <h1>Survey Analysis Tool</h1>
+            </div>
+        </header>
+
+        <!-- Welcome Message -->
+        <div class="welcome-message">
+            <p>Welcome to SAT - Your Survey Analysis Tool</p>
+        </div>
+
+        <!-- Chat Section -->
+        <main>
+            <section class="query-section">
+                <div class="content-box">
+                    <h2>Ask Your Question</h2>
+                    <form action="/query" method="POST" id="query-form">
+                        <div class="form-group">
+                            <label for="source">Select The Survey</label>
+                            <select name="source" id="source">
+                                <option value="Dataset 1 (Sustainability Research Results)">Sustainability Research</option>
+                                <option value="Dataset 2 (Christmas Research Results)">Christmas Research</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="query">Enter Your Question</label>
+                            <textarea id="query" name="query" rows="4" placeholder="Write your question here..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Generate Insights</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="result-section">
+                <div class="content-box">
+                    <h2>Response</h2>
+                    <div id="result" class="result-box"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="contact-support">
+        <p>Powered by OpenAI</p>
+        <p>For More Information? <a href="https://www.bounceinsights.com" target="_blank">Visit the Website</a></p>
+    </div>
+
+    <script>
+        document.getElementById('query-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const query = document.getElementById('query').value;
+            const source = document.getElementById('source').value;
+
+            fetch('/query', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ query: query, source: source }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = '<p>' + data.answer + '</p>';
+            })
+            .catch(error => {
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = '<p style="color:red;">Error: ' + error.message + '</p>';
+            });
+        });
+    </script>
+</body>
+</html>
