@@ -123,6 +123,13 @@ The backend exposes a POST endpoint for querying datasets.
 
 - If the request fails, the API returns an appropriate HTTP status code and an error message.
 
+## Web Application Interface
+
+
+
+<p align="center">
+  <img src="/SAT.png" alt="My Image" width="700"/>
+</p>
 
 ## Acknowledgement
 
