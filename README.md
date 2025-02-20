@@ -43,7 +43,7 @@ The datasets provided by Bounce Insights include:
 - **Python:** Required programming language; ensure version 3.9 or later is installed.
 - **LangChain:** Library for building LLM applications.
 - **FastAPI:** Framework for building APIs.
-- **OpenAI SDK:** Necessary for interacting with OpenAI models.
+- **OpenAI:** For interacting with OpenAI models.
 - **Conda Virtual Environment (optional):** To manage dependencies for running python packages.
 
 ## Installation and Setup
