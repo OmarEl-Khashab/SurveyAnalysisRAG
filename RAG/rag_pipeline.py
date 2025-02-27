@@ -1,4 +1,3 @@
-import openai
 from RAG.data_load_split import Document
 from RAG.vector_store import VectorStore
 from RAG.generation import Generator
@@ -49,23 +48,3 @@ class RAGPipeline:
         except Exception as e:
             print(f"Error during pipeline run: {e}")
             return None
-
-
-if __name__ == "__main__":
-    data_path = "/Users/omarelkhashab/PycharmProjects/SurveyAnalysisRAG/Data"
-    embeddings_dir = "/Users/omarelkhashab/PycharmProjects/SurveyAnalysisRAG/Data/Text_Embeddings"
-#
-    rag_pipeline = RAGPipeline(data_path, embeddings_dir, source="Dataset 1 (Sustainability Research Results)")
-    output = rag_pipeline.run(query="How important is sustainability to consumers?")
-
-# response = gen.generate_response(query="How important is sustainability to consumers?")
-
-# documents = Document(file_path=data_path)
-# vectorstore = VectorStore(document=documents, embeddings_model="text-embedding-ada-002",
-#                           embeddings_dir=embeddings_dir)
-
-# vectorstore.store_embeddings()  # Add embeddings to the vector store
-
-# vector = vectorstore.retrieve_embeddings()
-
-# gen = Generator(model_name="gpt-4", retriever=vector)

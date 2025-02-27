@@ -12,30 +12,28 @@ class ChatPrompt:
         """
         Creates and returns a ChatPromptTemplate with a system and human message prompt.
         """
-        temp1 = '''
-        You are a helpful Survey Analysis chatbot assistant at Bounce Insights company at Dublin, Ireland.
-        The platform is an AI insights consumer platform offering actionable insights to businesses.
-        Your task is to provide the team with answers to their questions in maximum of two lines.
-        To answer the question, based only on the following context:
-        {context}
-        
-        At the end of the response, specify the name of the source of the answer as:
-        Resources:
-        Source is the dataset the following: 
-        '''
-        temp1_= """ You are an assistant for question-answering tasks. 
-                            "Specialized in data analysis and interpreting survey data. "
-                            "Use the following pieces of retrieved context to answer the question. "
-                            "If you don't know the answer, just say that you don't know. "
-                            "Use three sentences maximum and keep the answer concise and provide some numbers\n"
-                            "Context: {context} \n"
-        """
+        # temp1_ = """ You are an assistant for question-answering tasks.
+        #                    "Specialized in data analysis and interpreting survey data. "
+        #                    "Use the following pieces of retrieved context to answer the question. "
+        #                    "If you don't know the answer, just say that you don't know. "
+        #                   "Use three sentences maximum and keep the answer concise and provide some numbers\n"
+        #                   "Context: {context} \n"
+        # """
 
+        temp2_ = """ You are an assistant for question-answering tasks. 
+                                    "Specialized in data analysis and interpreting survey data. "
+                                    "Use the following pieces of retrieved context Context: {context} to answer 
+                                    the question. "
+                                    "If you don't know the answer, just say that you don't know. "
+                                    "Use maximum 25 words to describe keep the answer focused and provide 
+                                    some numbers \n"
+                                     \n"
+        """
         temp2 = "{question}"
 
         # Create the ChatPromptTemplate
         self.chat_prompt = ChatPromptTemplate.from_messages([
-            SystemMessagePromptTemplate.from_template(temp1_),
+            SystemMessagePromptTemplate.from_template(temp2_),
             HumanMessagePromptTemplate.from_template(temp2)
         ])
 

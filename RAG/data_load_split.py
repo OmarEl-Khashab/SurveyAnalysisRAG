@@ -1,7 +1,6 @@
 from langchain_community.document_loaders import UnstructuredExcelLoader
 from unstructured.cleaners.core import clean_extra_whitespace
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-import glob
 import os
 
 
@@ -43,7 +42,7 @@ class Document:
         for docs in self.documents:
             source = os.path.basename(docs.metadata.get('source', '')).split(".")[0]
             docs.metadata['source'] = source  # Update the source metadata
-            # docs.page_content = " ".join(docs.page_content.split())  # Clean extra whitespace
+            docs.page_content = " ".join(docs.page_content.split())  # Clean extra whitespace
 
         # Split the documents
 
@@ -55,16 +54,3 @@ class Document:
             list: A list of split documents.
         """
         return self.split_document()
-
-
-# data_path = "/Users/omarelkhashab/PycharmProjects/SurveyAnalysisRAG/Data"
-# documents = Document(data_path)
-#
-# # # Loads and processes all documents
-# documents.process()
-# # #
-# docs = documents.get_documents()
-# # #
-# # #
-# # # # Get all processed documents
-# print(len(docs))

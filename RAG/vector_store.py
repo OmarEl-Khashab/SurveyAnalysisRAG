@@ -10,7 +10,7 @@ class VectorStore:
                  source,
                  embeddings_model='text-embedding-ada-002',
                  search_type='mmr',
-                 k=10):
+                 k=20):
         """
         Initializes the VectorStore class.
 
@@ -71,30 +71,3 @@ class VectorStore:
                            'lambda_mult': 0.2, 'filter': {'source': self.source}}
         )
         return retriever
-
-# #
-data_path = "/Users/omarelkhashab/PycharmProjects/SurveyAnalysisRAG/Data"
-embeddings_dir = "/Users/omarelkhashab/PycharmProjects/SurveyAnalysisRAG/Data/Text_Embeddings"
-
-documents = Document(data_path)
-documents.process()  # Loads and processes all documents
-docs = documents.get_documents()
-
-vectorstore = VectorStore(doc=docs, embeddings_dir=embeddings_dir,source ="Dataset 1 (Sustainability Research Results)",
-embeddings_model="text-embedding-ada-002",
-                           )
-
-# # Add embeddings to the vector store
-#
-# vector = vectorstore.retrieve_embeddings()
-# doczs = vector.invoke("How important is sustainability to consumers?")
-#
-# def pretty_print_docs(docs):
-#     print(
-#         f"\n{'-' * 100}\n".join(
-#             [f"Document {i + 1}:\n\n" + d.page_content for i, d in enumerate(docs)]
-#         )
-#     )
-#
-#
-# pretty_print_docs(doczs)
